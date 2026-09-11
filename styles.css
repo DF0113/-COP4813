@@ -82,6 +82,98 @@ a:focus {
     margin: 12px 0;
 }
 
+.form-section {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input,
+select,
+textarea {
+    box-sizing: border-box;
+    border: 1px solid #666666;
+    border-radius: 4px;
+    font: inherit;
+    padding: 10px;
+    width: 100%;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #0b4f8a;
+    outline: 3px solid #b9d9ee;
+}
+
+button,
+.button-link {
+    background-color: #173f5f;
+    border: 0;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font: inherit;
+    margin-right: 10px;
+    padding: 12px 18px;
+    text-decoration: none;
+}
+
+button:hover,
+button:focus,
+.button-link:hover,
+.button-link:focus {
+    background-color: #0b4f8a;
+    color: white;
+    text-decoration: underline;
+}
+
+.form-error {
+    color: #a61b1b;
+    font-weight: bold;
+}
+
+.confirmation-details {
+    border: 1px solid #b0b0b0;
+    margin: 25px 0;
+    padding: 20px;
+}
+
+.confirmation-details dt {
+    color: #173f5f;
+    font-weight: bold;
+    margin-top: 14px;
+}
+
+.confirmation-details dt:first-child {
+    margin-top: 0;
+}
+
+.confirmation-details dd {
+    margin: 5px 0 0;
+    white-space: pre-wrap;
+}
+
 footer {
     background-color: #173f5f;
     color: white;
@@ -101,5 +193,15 @@ footer p {
     main {
         margin: 0;
         padding: 20px;
+    }
+
+    .form-row {
+        display: block;
+    }
+
+    button,
+    .button-link {
+        margin-bottom: 10px;
+        width: 100%;
     }
 }

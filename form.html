@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact form assignment for Dakota Freed's COP4813 portfolio.">
+    <meta name="author" content="Dakota Freed">
+    <title>Contact Form | Dakota Freed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Contact Form</h1>
+        <p>COP4813 Web Systems</p>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="assignments.html">My Assignments</a></li>
+            <li><a href="assignment1.html">Assignment 1</a></li>
+            <li><a href="form.html">Assignment 3 Form</a></li>
+            <li><a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="form-section">
+            <h2>Send Me a Message</h2>
+            <p>All fields are required. Please review your information before sending it.</p>
+
+            <form id="contact-form" action="mailto:dakota_freed@daytonastate.edu" method="post" enctype="text/plain">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name" required pattern="[A-Za-z][A-Za-z '-]*" title="Enter a first name using letters, spaces, apostrophes, or hyphens.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last-name" required pattern="[A-Za-z][A-Za-z '-]*" title="Enter a last name using letters, spaces, apostrophes, or hyphens.">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Street Address</label>
+                    <input type="text" id="address" name="address" required pattern="[0-9]+[ ]+[A-Za-z0-9 .,'#-]+" title="Enter a street number followed by a street name.">
+                </div>
+
+                <div class="form-row address-row">
+                    <div class="form-group city-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" required pattern="[A-Za-z][A-Za-z .'-]*" title="Enter a city name using letters, spaces, apostrophes, periods, or hyphens.">
+                    </div>
+
+                    <div class="form-group state-group">
+                        <label for="state">State</label>
+                        <select id="state" name="state" required>
+                            <option value="">Choose a state</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group zip-group">
+                        <label for="zip">ZIP Code</label>
+                        <input type="text" id="zip" name="zip" required inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" title="Enter a 5-digit ZIP code or ZIP+4.">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required inputmode="numeric" maxlength="13" placeholder="(000)000-0000" pattern="\([0-9]{3}\)[0-9]{3}-[0-9]{4}" title="Enter a 10-digit phone number in the format (000)000-0000.">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required autocomplete="email" placeholder="name@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="birthdate">Birth Date</label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="security-answer">Security Question: What is 4 + 3?</label>
+                    <input type="text" id="security-answer" name="security-answer" required inputmode="numeric" pattern="7" title="Enter the answer to the security question.">
+                </div>
+
+                <p id="form-error" class="form-error" aria-live="polite"></p>
+                <button type="submit">Review Your Information</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Dakota Freed for COP4813 Web Systems</p>
+    </footer>
+
+    <script src="form.js"></script>
+</body>
+</html>

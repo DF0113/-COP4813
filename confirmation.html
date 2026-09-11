@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Confirmation page for Dakota Freed's COP4813 contact form.">
+    <meta name="author" content="Dakota Freed">
+    <title>Confirm Your Information | Dakota Freed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Confirm Your Information</h1>
+        <p>COP4813 Web Systems</p>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="assignments.html">My Assignments</a></li>
+            <li><a href="assignment1.html">Assignment 1</a></li>
+            <li><a href="form.html">Assignment 3 Form</a></li>
+            <li><a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="form-section">
+            <h2>Review Before Sending</h2>
+            <p>Please make sure the information below is correct.</p>
+            <p id="confirmation-error" class="form-error" aria-live="polite"></p>
+
+            <dl id="confirmation-details" class="confirmation-details">
+                <dt>Name</dt>
+                <dd id="confirm-name"></dd>
+                <dt>Address</dt>
+                <dd id="confirm-address"></dd>
+                <dt>Phone Number</dt>
+                <dd id="confirm-phone"></dd>
+                <dt>Email Address</dt>
+                <dd id="confirm-email"></dd>
+                <dt>Birth Date</dt>
+                <dd id="confirm-birthdate"></dd>
+                <dt>Message</dt>
+                <dd id="confirm-message"></dd>
+            </dl>
+
+            <form id="confirmation-form" action="mailto:dakota_freed@daytonastate.edu" method="post" enctype="text/plain">
+                <input type="hidden" id="email-body" name="message">
+                <button type="submit">Confirm and Open Email</button>
+                <a href="form.html" class="button-link">Go Back and Edit</a>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Dakota Freed for COP4813 Web Systems</p>
+    </footer>
+
+    <script src="form.js"></script>
+</body>
+</html>
