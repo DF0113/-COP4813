@@ -185,6 +185,216 @@ footer p {
     margin: 0;
 }
 
+/* =========================================================
+   Assignment 4: Calculator & Plotting Styles
+   ========================================================= */
+
+.equation-box {
+    background-color: #eaf2f8;
+    border-left: 5px solid #20639b;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.equation-box code {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #173f5f;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.equation-legend {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+.preset-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 20px;
+}
+
+.preset-btn {
+    background-color: #edf2f7;
+    color: #173f5f;
+    border: 1px solid #cbd5e1;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 0;
+}
+
+.preset-btn:hover,
+.preset-btn:focus {
+    background-color: #20639b;
+    color: #ffffff;
+    border-color: #20639b;
+    text-decoration: none;
+}
+
+.preset-btn.active {
+    background-color: #173f5f;
+    color: #ffffff;
+    border-color: #173f5f;
+    font-weight: bold;
+}
+
+.field-help {
+    display: block;
+    color: #666666;
+    font-size: 0.82rem;
+    margin-top: 4px;
+}
+
+.envelope-toggle-group {
+    margin: 15px 0 20px;
+}
+
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #545b62;
+}
+
+.button-link-inline {
+    background: none;
+    border: none;
+    color: #0b4f8a;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.92rem;
+    text-decoration: underline;
+    padding: 0;
+    margin: 0 0 10px;
+}
+
+.button-link-inline:hover {
+    background: none;
+    color: #062f54;
+}
+
+.chart-container {
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.metric-card {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px 14px;
+    text-align: center;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #173f5f;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metric-value {
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: #20639b;
+    margin: 6px 0;
+}
+
+.metric-sub {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.table-wrapper {
+    max-height: 280px;
+    overflow-y: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.data-table thead {
+    background-color: #173f5f;
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.data-table th,
+.data-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.data-table tbody tr:hover {
+    background-color: #edf2f7;
+}
+
+.output-raw {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 12px;
+    margin-top: 15px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.88rem;
+    color: #333333;
+    line-height: 1.6;
+}
+
 @media (max-width: 600px) {
     nav li {
         display: block;
@@ -204,4 +414,14 @@ footer p {
         margin-bottom: 10px;
         width: 100%;
     }
+
+    .preset-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
+

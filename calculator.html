@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assignment 4: Damped Harmonic Motion Calculator and Plotter for COP4813 by Dakota Freed.">
+    <meta name="author" content="Dakota Freed">
+    <title>Assignment 4: Plotting Calculator | Dakota Freed</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Highcharts Plotting Library (matching course reference) -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Assignment 4: Plotting Calculator</h1>
+        <p>COP4813 Web Systems</p>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="assignments.html">My Assignments</a></li>
+            <li><a href="assignment1.html">Assignment 1</a></li>
+            <li><a href="form.html">Assignment 3 Form</a></li>
+            <li><a href="calculator.html">Assignment 4 Calculator</a></li>
+            <li><a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="calculator-intro">
+            <h2>Damped Harmonic Oscillation Calculator</h2>
+            <p>
+                This interactive calculator solves and plots the engineering equation for 
+                <strong>underdamped harmonic motion</strong> (decaying oscillations over time or distance):
+            </p>
+            <div class="equation-box">
+                <code>y(x) = A &middot; e<sup>-&gamma;x</sup> &middot; cos(&omega;x + &phi;)</code>
+            </div>
+            <p class="equation-legend">
+                Where <strong>A</strong> is the initial amplitude, <strong>&gamma;</strong> (gamma) is the damping coefficient, 
+                <strong>&omega;</strong> (omega) is the angular frequency (rad/s), <strong>&phi;</strong> (phi) is the phase shift, 
+                and <strong>x</strong> is the independent variable (time or distance).
+            </p>
+        </section>
+
+        <section class="calculator-presets">
+            <h3>Quick Example Presets</h3>
+            <p>Select a preset scenario to auto-populate working seed values:</p>
+            <div class="preset-buttons">
+                <button type="button" class="preset-btn" data-preset="underdamped">Underdamped Wave (Default)</button>
+                <button type="button" class="preset-btn" data-preset="lightly-damped">Lightly Damped / Slow Decay</button>
+                <button type="button" class="preset-btn" data-preset="high-freq">High-Frequency Ringing</button>
+                <button type="button" class="preset-btn" data-preset="undamped">Undamped Wave (&gamma; = 0)</button>
+            </div>
+        </section>
+
+        <section class="calculator-form-section">
+            <h3>Equation Parameters</h3>
+            <p>Adjust parameters or use the pre-filled seed values below:</p>
+
+            <form id="calculator-form" onsubmit="return false;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="amplitude">Initial Amplitude (A):</label>
+                        <input type="number" id="amplitude" name="amplitude" value="10.0" step="any" required>
+                        <small class="field-help">Peak displacement magnitude.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="damping">Damping Coefficient (&gamma;):</label>
+                        <input type="number" id="damping" name="damping" value="0.2" step="any" min="0" required>
+                        <small class="field-help">Decay rate (&ge; 0). 0 = no decay.</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="omega">Angular Frequency (&omega;):</label>
+                        <input type="number" id="omega" name="omega" value="2.5" step="any" required>
+                        <small class="field-help">Oscillation speed in radians/sec.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phi">Phase Shift (&phi; in radians):</label>
+                        <input type="number" id="phi" name="phi" value="0.0" step="any" required>
+                        <small class="field-help">Starting angle offset.</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="xmin">X Min (Start):</label>
+                        <input type="number" id="xmin" name="xmin" value="0.0" step="any" required>
+                        <small class="field-help">Minimum range of x.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="xmax">X Max (End):</label>
+                        <input type="number" id="xmax" name="xmax" value="15.0" step="any" required>
+                        <small class="field-help">Maximum range of x.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="xstep">Step Size (&Delta;x):</label>
+                        <input type="number" id="xstep" name="xstep" value="0.1" step="any" min="0.001" required>
+                        <small class="field-help">Sampling interval.</small>
+                    </div>
+                </div>
+
+                <div class="envelope-toggle-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="show-envelope" checked>
+                        Plot exponential decay envelopes (&plusmn; A &middot; e<sup>-&gamma;x</sup>)
+                    </label>
+                </div>
+
+                <p id="calc-error" class="form-error" aria-live="polite"></p>
+
+                <div class="button-row">
+                    <button type="button" id="btn-calculate">Calculate Solutions</button>
+                    <button type="button" id="btn-plot">Plot Graph</button>
+                    <button type="button" id="btn-reset" class="btn-secondary">Reset to Defaults</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Plot Visualization Section -->
+        <section class="plot-section">
+            <h3>Graphical Plot</h3>
+            <div id="plot-container" class="chart-container" style="min-width: 320px; height: 420px; margin: 0 auto;"></div>
+        </section>
+
+        <!-- Engineering Summary Metrics -->
+        <section class="metrics-section">
+            <h3>Calculated System Characteristics</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Oscillation Period (T)</div>
+                    <div class="metric-value" id="stat-period">--</div>
+                    <div class="metric-sub">T = 2&pi; / &omega;</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Frequency (f)</div>
+                    <div class="metric-value" id="stat-frequency">--</div>
+                    <div class="metric-sub">f = 1 / T (Hz)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Maximum Y Value</div>
+                    <div class="metric-value" id="stat-max-y">--</div>
+                    <div class="metric-sub">Within plotted range</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Minimum Y Value</div>
+                    <div class="metric-value" id="stat-min-y">--</div>
+                    <div class="metric-sub">Within plotted range</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Total Data Points</div>
+                    <div class="metric-value" id="stat-total-points">--</div>
+                    <div class="metric-sub">Calculated samples</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculated Solutions Table / Output List -->
+        <section class="results-section">
+            <h3>Calculated Solutions Table</h3>
+            <p>Below is the numerical data series generated for each step of <code>x</code> within the specified range:</p>
+            <div class="table-actions">
+                <button type="button" id="toggle-table-btn" class="button-link-inline">Show / Hide Full Table</button>
+            </div>
+            <div id="table-wrapper" class="table-wrapper">
+                <table class="data-table" id="solutions-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Point #</th>
+                            <th scope="col">X (Independent)</th>
+                            <th scope="col">Y (Displacement)</th>
+                            <th scope="col">+Envelope (+Ae<sup>-&gamma;x</sup>)</th>
+                            <th scope="col">-Envelope (-Ae<sup>-&gamma;x</sup>)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Populated by calculator.js -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="output-text" class="output-raw"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Dakota Freed for COP4813 Web Systems</p>
+    </footer>
+
+    <script src="calculator.js"></script>
+</body>
+</html>
