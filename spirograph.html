@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assignment 5: HTML5 Canvas Spirograph for COP4813 by Dakota Freed.">
+    <meta name="author" content="Dakota Freed">
+    <title>Assignment 5: HTML5 Canvas Spirograph | Dakota Freed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Assignment 5: HTML5 Canvas Spirograph</h1>
+        <p>COP4813 Web Systems</p>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="assignments.html">My Assignments</a></li>
+            <li><a href="assignment1.html">Assignment 1</a></li>
+            <li><a href="form.html">Assignment 3 Form</a></li>
+            <li><a href="calculator.html">Assignment 4 Calculator</a></li>
+            <li><a href="spirograph.html">Assignment 5 Canvas</a></li>
+            <li><a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="spiro-intro">
+            <h2>Mathematical Spirograph Generator</h2>
+            <p>
+                A <strong>Spirograph</strong> is a classic geometric drawing toy that creates intricate mathematical 
+                curves (epitrochoids and hypotrochoids) using rotating circles. This interactive generator 
+                uses the <strong>HTML5 &lt;canvas&gt; API</strong> and client-side JavaScript to trace the pen's trajectory in real-time.
+            </p>
+            <div class="equation-box">
+                <code>x(t) = (R + r) &middot; cos(t) - (r + O) &middot; cos(((R + r) / r) &middot; t)</code><br>
+                <code>y(t) = (R + r) &middot; sin(t) - (r + O) &middot; sin(((R + r) / r) &middot; t)</code>
+            </div>
+            <p class="equation-legend">
+                Where <strong>R</strong> is the fixed outer circle radius, <strong>r</strong> is the rotating inner circle radius 
+                (must satisfy <em>r &le; R</em>), <strong>O</strong> is the pen offset from the inner circle's center, 
+                and <strong>t</strong> is the continuous angle variable that increments from 0.
+            </p>
+        </section>
+
+        <!-- Presets Section -->
+        <section class="spiro-presets">
+            <h3>Quick Pattern Presets</h3>
+            <p>Select a classic pattern to populate working values, or use the randomize button below:</p>
+            <div class="preset-buttons">
+                <button type="button" class="preset-btn active" data-preset="star-flower">5-Petal Star (Default)</button>
+                <button type="button" class="preset-btn" data-preset="delicate-rose">Delicate Rose</button>
+                <button type="button" class="preset-btn" data-preset="intricate-lace">Intricate Lace</button>
+                <button type="button" class="preset-btn" data-preset="hypo-blossom">Hypo Blossom</button>
+                <button type="button" class="preset-btn" data-preset="starburst">Starburst Wheel</button>
+            </div>
+        </section>
+
+        <!-- Parameters & Controls Section -->
+        <section class="spiro-controls-section">
+            <h3>Configuration & Controls</h3>
+            <form id="spiro-form" onsubmit="return false;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="radius-r-large">Outer Radius (R):</label>
+                        <input type="number" id="radius-r-large" name="radius-r-large" value="140" min="20" max="220" step="1" required>
+                        <small class="field-help">Radius of fixed circle (Range: 20 &ndash; 220 px).</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="radius-r-small">Inner Radius (r):</label>
+                        <input type="number" id="radius-r-small" name="radius-r-small" value="56" min="5" max="220" step="1" required>
+                        <small class="field-help">Rotating radius (Must be &le; R, Range: 5 &ndash; R px).</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offset-o">Pen Offset (O):</label>
+                        <input type="number" id="offset-o" name="offset-o" value="42" min="0" max="180" step="1" required>
+                        <small class="field-help">Pen distance from inner center (Range: 0 &ndash; 180 px).</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="step-size">Angle Increment (&Delta;t):</label>
+                        <input type="number" id="step-size" name="step-size" value="0.05" min="0.005" max="0.5" step="0.005" required>
+                        <small class="field-help">Sampling resolution (smaller = smoother curve).</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="draw-speed">Drawing Speed:</label>
+                        <select id="draw-speed" name="draw-speed">
+                            <option value="5">Normal (5 steps/frame)</option>
+                            <option value="15" selected>Fast (15 steps/frame)</option>
+                            <option value="50">Turbo (50 steps/frame)</option>
+                            <option value="instant">Instant (Draw All Immediately)</option>
+                        </select>
+                        <small class="field-help">Animation speed during rendering.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color-mode">Color Palette:</label>
+                        <select id="color-mode" name="color-mode">
+                            <option value="rainbow" selected>Rainbow Spectrum (HSL Cycle)</option>
+                            <option value="random-segment">Random Color Segments</option>
+                            <option value="single">Single Solid Color</option>
+                        </select>
+                        <small class="field-help">Styling of the tracing line.</small>
+                    </div>
+                </div>
+
+                <div class="form-row" id="single-color-row" style="display: none;">
+                    <div class="form-group">
+                        <label for="pen-color">Custom Pen Color:</label>
+                        <input type="color" id="pen-color" name="pen-color" value="#173f5f">
+                    </div>
+                </div>
+
+                <div class="spiro-options-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="drunk-mode">
+                        <strong>"Drunk Spirograph" Mode</strong> (Adds random jitter to R and r on each step)
+                    </label>
+                </div>
+
+                <p id="spiro-error" class="form-error" aria-live="polite"></p>
+
+                <!-- Primary Action Buttons -->
+                <div class="button-row">
+                    <button type="button" id="btn-start" class="btn-primary">Start Drawing</button>
+                    <button type="button" id="btn-pause" class="btn-secondary" disabled>Pause</button>
+                    <button type="button" id="btn-clear" class="btn-secondary">Clear Canvas</button>
+                    <button type="button" id="btn-random" class="btn-accent">Randomize Values</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Canvas Display Section -->
+        <section class="canvas-section">
+            <div class="canvas-header-bar">
+                <span id="canvas-status">Status: Ready to draw</span>
+                <span id="canvas-stats">Points: 0 | t: 0.00 rad</span>
+            </div>
+
+            <div class="canvas-container">
+                <canvas id="spiro-canvas" width="600" height="600">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Dakota Freed for COP4813 Web Systems</p>
+    </footer>
+
+    <script src="spirograph.js"></script>
+</body>
+</html>
