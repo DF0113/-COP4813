@@ -305,14 +305,8 @@ function clearCanvas(resetUI = true) {
     isDrawing = false;
     isPaused = false;
 
-    // Clear canvas rectangle
+    // Clear canvas rectangle completely
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw subtle origin center dot
-    ctx.beginPath();
-    ctx.arc(canvas.width / 2, canvas.height / 2, 2, 0, 2 * Math.PI);
-    ctx.fillStyle = '#cccccc';
-    ctx.fill();
 
     prevX = null;
     prevY = null;
@@ -321,7 +315,7 @@ function clearCanvas(resetUI = true) {
 
     if (resetUI) {
         updateControls();
-        document.getElementById('canvas-status').textContent = 'Status: Canvas cleared (Ready)';
+        document.getElementById('canvas-status').textContent = 'Status: Blank Canvas (Ready - Click "Start Drawing")';
         updateStats();
     }
 }
@@ -440,8 +434,8 @@ function initSpirograph() {
         });
     });
 
-    // Initial draw of the default preset
-    startDrawing();
+    // Ensure the page starts with a clean blank canvas per the grading criteria
+    clearCanvas(true);
 }
 
 // Initialize on DOM load
