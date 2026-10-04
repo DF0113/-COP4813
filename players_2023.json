@@ -1,0 +1,173 @@
+{
+  "league": "National Basketball Association",
+  "season": "2022-2023",
+  "category": "Scoring Leaders & Player Statistics",
+  "lastUpdated": "2023-04-10",
+  "players": [
+    {
+      "id": 1,
+      "playerName": "Joel Embiid",
+      "team": "Philadelphia 76ers",
+      "position": "Center",
+      "gamesPlayed": 66,
+      "pointsPerGame": 33.1,
+      "reboundsPerGame": 10.2,
+      "assistsPerGame": 4.2,
+      "fieldGoalPercentage": 54.8
+    },
+    {
+      "id": 2,
+      "playerName": "Luka Dončić",
+      "team": "Dallas Mavericks",
+      "position": "Guard",
+      "gamesPlayed": 66,
+      "pointsPerGame": 32.4,
+      "reboundsPerGame": 8.6,
+      "assistsPerGame": 8.0,
+      "fieldGoalPercentage": 49.6
+    },
+    {
+      "id": 3,
+      "playerName": "Damian Lillard",
+      "team": "Portland Trail Blazers",
+      "position": "Guard",
+      "gamesPlayed": 58,
+      "pointsPerGame": 32.2,
+      "reboundsPerGame": 4.8,
+      "assistsPerGame": 7.3,
+      "fieldGoalPercentage": 46.3
+    },
+    {
+      "id": 4,
+      "playerName": "Shai Gilgeous-Alexander",
+      "team": "Oklahoma City Thunder",
+      "position": "Guard",
+      "gamesPlayed": 68,
+      "pointsPerGame": 31.4,
+      "reboundsPerGame": 4.8,
+      "assistsPerGame": 5.5,
+      "fieldGoalPercentage": 51.0
+    },
+    {
+      "id": 5,
+      "playerName": "Giannis Antetokounmpo",
+      "team": "Milwaukee Bucks",
+      "position": "Forward",
+      "gamesPlayed": 63,
+      "pointsPerGame": 31.1,
+      "reboundsPerGame": 11.8,
+      "assistsPerGame": 5.7,
+      "fieldGoalPercentage": 55.3
+    },
+    {
+      "id": 6,
+      "playerName": "Jayson Tatum",
+      "team": "Boston Celtics",
+      "position": "Forward",
+      "gamesPlayed": 74,
+      "pointsPerGame": 30.1,
+      "reboundsPerGame": 8.8,
+      "assistsPerGame": 4.6,
+      "fieldGoalPercentage": 46.6
+    },
+    {
+      "id": 7,
+      "playerName": "Stephen Curry",
+      "team": "Golden State Warriors",
+      "position": "Guard",
+      "gamesPlayed": 56,
+      "pointsPerGame": 29.4,
+      "reboundsPerGame": 6.1,
+      "assistsPerGame": 6.3,
+      "fieldGoalPercentage": 49.3
+    },
+    {
+      "id": 8,
+      "playerName": "Kevin Durant",
+      "team": "Phoenix Suns",
+      "position": "Forward",
+      "gamesPlayed": 47,
+      "pointsPerGame": 29.1,
+      "reboundsPerGame": 6.7,
+      "assistsPerGame": 5.0,
+      "fieldGoalPercentage": 56.0
+    },
+    {
+      "id": 9,
+      "playerName": "LeBron James",
+      "team": "Los Angeles Lakers",
+      "position": "Forward",
+      "gamesPlayed": 55,
+      "pointsPerGame": 28.9,
+      "reboundsPerGame": 8.3,
+      "assistsPerGame": 6.8,
+      "fieldGoalPercentage": 50.0
+    },
+    {
+      "id": 10,
+      "playerName": "Donovan Mitchell",
+      "team": "Cleveland Cavaliers",
+      "position": "Guard",
+      "gamesPlayed": 68,
+      "pointsPerGame": 28.3,
+      "reboundsPerGame": 4.3,
+      "assistsPerGame": 4.4,
+      "fieldGoalPercentage": 48.4
+    },
+    {
+      "id": 11,
+      "playerName": "Devin Booker",
+      "team": "Phoenix Suns",
+      "position": "Guard",
+      "gamesPlayed": 53,
+      "pointsPerGame": 27.8,
+      "reboundsPerGame": 4.5,
+      "assistsPerGame": 5.5,
+      "fieldGoalPercentage": 49.4
+    },
+    {
+      "id": 12,
+      "playerName": "Kyrie Irving",
+      "team": "Dallas Mavericks",
+      "position": "Guard",
+      "gamesPlayed": 60,
+      "pointsPerGame": 27.1,
+      "reboundsPerGame": 5.1,
+      "assistsPerGame": 5.5,
+      "fieldGoalPercentage": 49.4
+    },
+    {
+      "id": 13,
+      "playerName": "Jaylen Brown",
+      "team": "Boston Celtics",
+      "position": "Guard",
+      "gamesPlayed": 67,
+      "pointsPerGame": 26.6,
+      "reboundsPerGame": 6.9,
+      "assistsPerGame": 3.5,
+      "fieldGoalPercentage": 49.1
+    },
+    {
+      "id": 14,
+      "playerName": "Trae Young",
+      "team": "Atlanta Hawks",
+      "position": "Guard",
+      "gamesPlayed": 73,
+      "pointsPerGame": 26.2,
+      "reboundsPerGame": 3.0,
+      "assistsPerGame": 10.2,
+      "fieldGoalPercentage": 42.9
+    },
+    {
+      "id": 15,
+      "playerName": "Nikola Jokić",
+      "team": "Denver Nuggets",
+      "position": "Center",
+      "gamesPlayed": 69,
+      "pointsPerGame": 24.5,
+      "reboundsPerGame": 11.8,
+      "assistsPerGame": 9.8,
+      "fieldGoalPercentage": 63.2
+    }
+  ]
+}

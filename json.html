@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assignment 6: External JSON Data Viewer for COP4813 by Dakota Freed.">
+    <meta name="author" content="Dakota Freed">
+    <title>Assignment 6: JSON Data Viewer | Dakota Freed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Assignment 6: JSON Data Viewer</h1>
+        <p>COP4813 Web Systems</p>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="assignments.html">My Assignments</a></li>
+            <li><a href="assignment1.html">Assignment 1</a></li>
+            <li><a href="form.html">Assignment 3 Form</a></li>
+            <li><a href="calculator.html">Assignment 4 Calculator</a></li>
+            <li><a href="spirograph.html">Assignment 5 Canvas</a></li>
+            <li><a href="json.html">Assignment 6 JSON</a></li>
+            <li><a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="json-intro">
+            <h2>External JSON Data Parsing & Display</h2>
+            <p>
+                <strong>JSON (JavaScript Object Notation)</strong> is a lightweight, language-independent data-interchange 
+                format. In modern web systems, external databases and web APIs deliver structured query results as JSON.
+                Using client-side JavaScript and the <code>fetch()</code> API, the browser requests the external file, 
+                parses the text into native JavaScript objects via <code>response.json()</code>, and renders the data 
+                dynamically into the DOM without refreshing the web page.
+            </p>
+            <div class="json-concept-callout">
+                <strong>Why External JSON Matters:</strong> Decoupling the data layer from the presentation layer means 
+                the underlying records can be updated, swapped, or refreshed continuously without modifying a single line of HTML markup.
+            </div>
+        </section>
+
+        <!-- Dataset Selection & Controls -->
+        <section class="json-controls-section">
+            <h3>Dataset & Filter Controls</h3>
+            
+            <div class="dataset-switcher-bar">
+                <div class="switcher-group">
+                    <label for="dataset-select"><strong>Select External JSON File:</strong></label>
+                    <select id="dataset-select" aria-label="Choose dataset">
+                        <option value="players_2024.json" selected>2023-2024 Season Leaders (players_2024.json)</option>
+                        <option value="players_2023.json">2022-2023 Season Leaders (players_2023.json)</option>
+                    </select>
+                    <button type="button" id="btn-reload-json" class="btn-secondary">Reload JSON</button>
+                </div>
+
+                <div class="view-toggle-group">
+                    <span class="view-label">Display Mode:</span>
+                    <button type="button" id="btn-view-table" class="view-btn active" aria-pressed="true">Table View</button>
+                    <button type="button" id="btn-view-cards" class="view-btn" aria-pressed="false">Card View</button>
+                </div>
+            </div>
+
+            <!-- Search & Filter Controls -->
+            <div class="filter-controls-bar">
+                <div class="filter-group search-group">
+                    <label for="search-input">Search Players or Teams:</label>
+                    <input type="search" id="search-input" placeholder="Filter by name or team (e.g. Luka, Celtics)..." aria-label="Search players or teams">
+                </div>
+
+                <div class="filter-group position-group">
+                    <label for="position-filter">Filter by Position:</label>
+                    <select id="position-filter" aria-label="Filter by position">
+                        <option value="all">All Positions</option>
+                        <option value="Guard">Guards</option>
+                        <option value="Forward">Forwards</option>
+                        <option value="Center">Centers</option>
+                    </select>
+                </div>
+            </div>
+
+            <p id="json-error-message" class="form-error" aria-live="polite"></p>
+        </section>
+
+        <!-- Summary Statistics Cards -->
+        <section class="metrics-section">
+            <h3 id="dataset-heading">Season Summary</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Active Records</div>
+                    <div class="metric-value" id="stat-total-players">0</div>
+                    <div class="metric-sub">Players Displayed</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Top Scorer</div>
+                    <div class="metric-value" id="stat-top-scorer">--</div>
+                    <div class="metric-sub" id="stat-top-ppg">-- PPG</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Average Scoring</div>
+                    <div class="metric-value" id="stat-avg-ppg">--</div>
+                    <div class="metric-sub">Points Per Game</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Teams</div>
+                    <div class="metric-value" id="stat-total-teams">0</div>
+                    <div class="metric-sub">Represented in Data</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Human-Readable Data Display Area -->
+        <section class="json-display-section">
+            <div id="loading-spinner" class="loading-state" style="display: none;">
+                Loading and parsing external JSON data...
+            </div>
+
+            <!-- Table View -->
+            <div id="table-view-container" class="data-view-container">
+                <div class="table-wrapper">
+                    <table class="data-table" id="players-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="sortable-th" data-sort="id"># <span class="sort-icon">&#x21C5;</span></th>
+                                <th scope="col" class="sortable-th" data-sort="playerName">Player Name <span class="sort-icon">&#x21C5;</span></th>
+                                <th scope="col" class="sortable-th" data-sort="team">Team <span class="sort-icon">&#x21C5;</span></th>
+                                <th scope="col" class="sortable-th" data-sort="position">Pos <span class="sort-icon">&#x21C5;</span></th>
+                                <th scope="col" class="sortable-th" data-sort="gamesPlayed">Games <span class="sort-icon">&#x21C5;</span></th>
+                                <th scope="col" class="sortable-th" data-sort="pointsPerGame">PPG <span class="sort-icon">&#x21C5;</span></th>
+                                <th scope="col" class="sortable-th" data-sort="reboundsPerGame">RPG <span class="sort-icon">&#x21C5;</span></th>
+                                <th scope="col" class="sortable-th" data-sort="assistsPerGame">APG <span class="sort-icon">&#x21C5;</span></th>
+                                <th scope="col" class="sortable-th" data-sort="fieldGoalPercentage">FG % <span class="sort-icon">&#x21C5;</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="players-table-body">
+                            <!-- Populated dynamically by json_viewer.js -->
+                        </tbody>
+                    </table>
+                </div>
+                <small class="table-caption">Tip: Click any column header above to sort the table ascending or descending.</small>
+            </div>
+
+            <!-- Card Grid View (Alternate Human-Readable Display) -->
+            <div id="card-view-container" class="data-view-container" style="display: none;">
+                <div id="players-card-grid" class="cards-grid">
+                    <!-- Populated dynamically by json_viewer.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Raw JSON Inspector Drawer -->
+        <section class="raw-json-section">
+            <div class="raw-json-header">
+                <h3>Underlying External JSON Payload</h3>
+                <button type="button" id="btn-toggle-raw" class="button-link-inline">Show Raw JSON</button>
+            </div>
+            <p class="field-help">Inspect the exact raw text received from the external JSON file before client-side parsing:</p>
+            <div id="raw-json-drawer" class="raw-json-drawer" style="display: none;">
+                <pre><code id="raw-json-code">Fetching JSON payload...</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Dakota Freed for COP4813 Web Systems</p>
+    </footer>
+
+    <script src="json_viewer.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+{
+  "league": "National Basketball Association",
+  "season": "2023-2024",
+  "category": "Scoring Leaders & Player Statistics",
+  "lastUpdated": "2024-04-15",
+  "players": [
+    {
+      "id": 1,
+      "playerName": "Luka Dončić",
+      "team": "Dallas Mavericks",
+      "position": "Guard",
+      "gamesPlayed": 70,
+      "pointsPerGame": 33.9,
+      "reboundsPerGame": 9.2,
+      "assistsPerGame": 9.8,
+      "fieldGoalPercentage": 48.7
+    },
+    {
+      "id": 2,
+      "playerName": "Giannis Antetokounmpo",
+      "team": "Milwaukee Bucks",
+      "position": "Forward",
+      "gamesPlayed": 73,
+      "pointsPerGame": 30.4,
+      "reboundsPerGame": 11.5,
+      "assistsPerGame": 6.5,
+      "fieldGoalPercentage": 61.1
+    },
+    {
+      "id": 3,
+      "playerName": "Shai Gilgeous-Alexander",
+      "team": "Oklahoma City Thunder",
+      "position": "Guard",
+      "gamesPlayed": 75,
+      "pointsPerGame": 30.1,
+      "reboundsPerGame": 5.5,
+      "assistsPerGame": 6.2,
+      "fieldGoalPercentage": 53.5
+    },
+    {
+      "id": 4,
+      "playerName": "Jalen Brunson",
+      "team": "New York Knicks",
+      "position": "Guard",
+      "gamesPlayed": 77,
+      "pointsPerGame": 28.7,
+      "reboundsPerGame": 3.6,
+      "assistsPerGame": 6.7,
+      "fieldGoalPercentage": 47.9
+    },
+    {
+      "id": 5,
+      "playerName": "Nikola Jokić",
+      "team": "Denver Nuggets",
+      "position": "Center",
+      "gamesPlayed": 79,
+      "pointsPerGame": 26.4,
+      "reboundsPerGame": 12.4,
+      "assistsPerGame": 9.0,
+      "fieldGoalPercentage": 58.3
+    },
+    {
+      "id": 6,
+      "playerName": "Jayson Tatum",
+      "team": "Boston Celtics",
+      "position": "Forward",
+      "gamesPlayed": 74,
+      "pointsPerGame": 26.9,
+      "reboundsPerGame": 8.1,
+      "assistsPerGame": 4.9,
+      "fieldGoalPercentage": 47.1
+    },
+    {
+      "id": 7,
+      "playerName": "Kevin Durant",
+      "team": "Phoenix Suns",
+      "position": "Forward",
+      "gamesPlayed": 75,
+      "pointsPerGame": 27.1,
+      "reboundsPerGame": 6.6,
+      "assistsPerGame": 5.0,
+      "fieldGoalPercentage": 52.3
+    },
+    {
+      "id": 8,
+      "playerName": "Devin Booker",
+      "team": "Phoenix Suns",
+      "position": "Guard",
+      "gamesPlayed": 68,
+      "pointsPerGame": 27.1,
+      "reboundsPerGame": 4.5,
+      "assistsPerGame": 6.9,
+      "fieldGoalPercentage": 49.2
+    },
+    {
+      "id": 9,
+      "playerName": "Stephen Curry",
+      "team": "Golden State Warriors",
+      "position": "Guard",
+      "gamesPlayed": 74,
+      "pointsPerGame": 26.4,
+      "reboundsPerGame": 4.5,
+      "assistsPerGame": 5.1,
+      "fieldGoalPercentage": 45.0
+    },
+    {
+      "id": 10,
+      "playerName": "Anthony Edwards",
+      "team": "Minnesota Timberwolves",
+      "position": "Guard",
+      "gamesPlayed": 79,
+      "pointsPerGame": 25.9,
+      "reboundsPerGame": 5.4,
+      "assistsPerGame": 5.1,
+      "fieldGoalPercentage": 46.1
+    },
+    {
+      "id": 11,
+      "playerName": "LeBron James",
+      "team": "Los Angeles Lakers",
+      "position": "Forward",
+      "gamesPlayed": 71,
+      "pointsPerGame": 25.7,
+      "reboundsPerGame": 7.3,
+      "assistsPerGame": 8.3,
+      "fieldGoalPercentage": 54.0
+    },
+    {
+      "id": 12,
+      "playerName": "Anthony Davis",
+      "team": "Los Angeles Lakers",
+      "position": "Center",
+      "gamesPlayed": 76,
+      "pointsPerGame": 24.7,
+      "reboundsPerGame": 12.6,
+      "assistsPerGame": 3.5,
+      "fieldGoalPercentage": 55.6
+    },
+    {
+      "id": 13,
+      "playerName": "De'Aaron Fox",
+      "team": "Sacramento Kings",
+      "position": "Guard",
+      "gamesPlayed": 74,
+      "pointsPerGame": 26.6,
+      "reboundsPerGame": 4.6,
+      "assistsPerGame": 5.6,
+      "fieldGoalPercentage": 46.5
+    },
+    {
+      "id": 14,
+      "playerName": "Domantas Sabonis",
+      "team": "Sacramento Kings",
+      "position": "Center",
+      "gamesPlayed": 82,
+      "pointsPerGame": 19.4,
+      "reboundsPerGame": 13.7,
+      "assistsPerGame": 8.2,
+      "fieldGoalPercentage": 59.4
+    },
+    {
+      "id": 15,
+      "playerName": "Donovan Mitchell",
+      "team": "Cleveland Cavaliers",
+      "position": "Guard",
+      "gamesPlayed": 55,
+      "pointsPerGame": 26.6,
+      "reboundsPerGame": 5.1,
+      "assistsPerGame": 6.1,
+      "fieldGoalPercentage": 46.2
+    }
+  ]
+}
