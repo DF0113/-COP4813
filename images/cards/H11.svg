@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" width="200" height="280">
+  <defs>
+    <filter id="card-shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="1" dy="3" stdDeviation="3" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect x="4" y="4" width="192" height="272" rx="12" ry="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#card-shadow)"/>
+  <rect x="10" y="10" width="180" height="260" rx="8" ry="8" fill="none" stroke="#f1f5f9" stroke-width="1.5"/>
+  
+  <!-- Top Left Corner -->
+  <text x="18" y="34" font-family="Arial, sans-serif" font-weight="bold" font-size="22" fill="#dc2626">J</text>
+  <text x="18" y="54" font-family="Arial, sans-serif" font-size="18" fill="#dc2626">♥</text>
+  
+  <!-- Center Design -->
+  
+                <circle cx="100" cy="140" r="42" fill="#f8fafc" stroke="#dc2626" stroke-width="2" />
+                <text x="100" y="152" font-family="Georgia, serif" font-weight="bold" font-size="44" text-anchor="middle" fill="#dc2626">J</text>
+                <text x="100" y="174" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#dc2626">♥</text>
+            
+  
+  <!-- Bottom Right Corner (Inverted) -->
+  <g transform="rotate(180, 100, 140)">
+    <text x="18" y="34" font-family="Arial, sans-serif" font-weight="bold" font-size="22" fill="#dc2626">J</text>
+    <text x="18" y="54" font-family="Arial, sans-serif" font-size="18" fill="#dc2626">♥</text>
+  </g>
+</svg>

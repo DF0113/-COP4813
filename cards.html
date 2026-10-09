@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assignment 7: HTML5 Drag and Drop Playing Cards and Discard Interface for COP4813 by Dakota Freed.">
+    <meta name="author" content="Dakota Freed">
+    <title>Assignment 7: Drag &amp; Drop Cards | Dakota Freed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Assignment 7: Drag &amp; Drop Cards</h1>
+        <p>COP4813 Web Systems</p>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="assignments.html">My Assignments</a></li>
+            <li><a href="assignment1.html">Assignment 1</a></li>
+            <li><a href="form.html">Assignment 3 Form</a></li>
+            <li><a href="calculator.html">Assignment 4 Calculator</a></li>
+            <li><a href="spirograph.html">Assignment 5 Canvas</a></li>
+            <li><a href="json.html">Assignment 6 JSON</a></li>
+            <li><a href="cards.html">Assignment 7 Drag &amp; Drop</a></li>
+            <li><a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="cards-intro">
+            <h2>HTML5 Drag and Drop Card Deck &amp; Discard Pile</h2>
+            <p>
+                The <strong>HTML5 Drag and Drop API</strong> brings native client-side drag-and-drop capability 
+                to modern web applications. In this interactive interface, playing cards are dealt from a 
+                shuffled 52-card deck into the player's hand. Each card is an interactive image with 
+                <code>draggable="true"</code>. Players can drag any card from their active hand and release it 
+                onto the designated <strong>Discard Pile</strong> drop target.
+            </p>
+            <div class="cards-instructions-box">
+                <strong>How to Test the Assignment:</strong>
+                <ol>
+                    <li>Click <strong>"Deal Hand (5 Cards)"</strong> to deal cards from the deck.</li>
+                    <li>Click and drag any card from your active hand.</li>
+                    <li>Drop the card onto the <strong>Discard Pile</strong> zone.</li>
+                    <li>Observe the triggered event: the card moves to the discard pile, a capture notification appears, the poker hand re-evaluates, and the timestamped event is logged below.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Game Controls & Statistics Toolbar -->
+        <section class="cards-controls-section">
+            <div class="cards-toolbar">
+                <div class="toolbar-buttons">
+                    <button type="button" id="btn-deal-hand" class="btn-primary">Deal Hand (5 Cards)</button>
+                    <button type="button" id="btn-deal-one" class="btn-secondary">Deal 1 Card</button>
+                    <button type="button" id="btn-reset-deck" class="btn-secondary">Shuffle &amp; Reset Deck</button>
+                </div>
+
+                <div class="toolbar-options">
+                    <label class="checkbox-label" for="auto-replace-toggle">
+                        <input type="checkbox" id="auto-replace-toggle" checked>
+                        <span>Auto-Deal Replacement on Discard</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="cards-stats-bar">
+                <div class="stat-pill">
+                    <span class="stat-pill-label">Cards in Deck:</span>
+                    <strong id="deck-count">52</strong> / 52
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-pill-label">In Hand:</span>
+                    <strong id="hand-count">0</strong> / 5
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-pill-label">Discarded:</span>
+                    <strong id="discard-count">0</strong>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-pill-label">Hand Rank:</span>
+                    <strong id="hand-evaluation">No cards dealt</strong>
+                </div>
+            </div>
+
+            <!-- Triggered Event Alert Banner -->
+            <div id="event-alert-banner" class="event-alert" aria-live="polite" style="display: none;">
+                <span class="event-icon">&#x2713;</span>
+                <span id="event-alert-text">Ready</span>
+            </div>
+        </section>
+
+        <!-- Main Card Table Felt Area -->
+        <section class="card-table-section">
+            <div class="card-table-felt">
+                
+                <!-- Deck Area -->
+                <div class="table-zone deck-zone">
+                    <div class="zone-label">Draw Deck</div>
+                    <div id="deck-visual" class="deck-stack">
+                        <img src="images/cards/card_back.svg" alt="Deck back" class="card-image deck-card-back">
+                    </div>
+                </div>
+
+                <!-- Active Hand Area -->
+                <div class="table-zone hand-zone">
+                    <div class="zone-label">Player's Active Hand (Drag cards from here)</div>
+                    <div id="hand-container" class="cards-container">
+                        <div class="empty-hand-prompt" id="empty-hand-msg">
+                            Click <strong>"Deal Hand"</strong> to deal cards.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discard Pile Drop Target Area -->
+                <div class="table-zone discard-zone-wrapper">
+                    <div class="zone-label">Discard Pile (Drop target)</div>
+                    <div id="discard-drop-target" class="discard-drop-target" aria-label="Discard Pile Drop Zone">
+                        <div class="drop-zone-content" id="drop-zone-placeholder">
+                            <div class="drop-target-icon">&#x21E3;</div>
+                            <div class="drop-target-title">DROP CARDS HERE</div>
+                            <small class="drop-target-hint">Release dragged card to discard</small>
+                        </div>
+                        <div id="discard-stack" class="discard-stack" style="display: none;">
+                            <!-- Top discarded card placed dynamically here -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Event History Log Drawer -->
+        <section class="event-log-section">
+            <div class="event-log-header">
+                <h3>Captured Event History Log</h3>
+                <button type="button" id="btn-clear-log" class="button-link-inline">Clear Log</button>
+            </div>
+            <p class="field-help">Live record of all drag-and-drop actions captured by the application:</p>
+            <div id="event-log-container" class="event-log-container">
+                <ul id="event-log-list" class="event-log-list">
+                    <li class="log-item initial-log">Ready. Deal a hand and drag a card to the discard pile to trigger captured events.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Dakota Freed for COP4813 Web Systems</p>
+    </footer>
+
+    <script src="cards.js"></script>
+</body>
+</html>

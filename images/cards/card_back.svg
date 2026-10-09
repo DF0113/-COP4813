@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" width="200" height="280">
+  <defs>
+    <pattern id="card-pattern" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 8 L8 0 L16 8 L8 16 Z" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+      <circle cx="8" cy="8" r="2" fill="#60a5fa"/>
+    </pattern>
+  </defs>
+  <rect x="4" y="4" width="192" height="272" rx="12" ry="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="12" y="12" width="176" height="256" rx="8" ry="8" fill="#1e3a8a"/>
+  <rect x="16" y="16" width="168" height="248" rx="6" ry="6" fill="url(#card-pattern)"/>
+  <circle cx="100" cy="140" r="32" fill="#1e3a8a" stroke="#ffffff" stroke-width="2"/>
+  <text x="100" y="146" font-family="Georgia, serif" font-weight="bold" font-size="22" text-anchor="middle" fill="#ffffff">COP</text>
+</svg>
