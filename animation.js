@@ -2,10 +2,10 @@
  * COP4813 Assignment 9 - Canvas Animation & Interactivity
  * Student: Dakota Freed
  * Features:
- *   - Part 1: Real-time 2D canvas object animation starting diagonally across the screen (45° when dx == dy)
- *   - Part 1: Bounded arena with elastic reflection, random angle deflection, wall stopping, or mathematical path
- *   - Part 1: Timer-based animation engine (setInterval) following professor recommendations, plus requestAnimationFrame toggle
- *   - Part 2: Interactive mouse click response: Particle explosion (professor's favorite!), color shift, morph, or shockwave
+ *   - Real-time 2D canvas object animation starting diagonally across the screen (45° when dx == dy)
+ *   - Bounded arena with elastic reflection, random angle deflection, wall stopping, or mathematical path
+ *   - Timer-based animation engine (setInterval) and requestAnimationFrame toggle
+ *   - Interactive mouse click response: Particle explosion, color shift, morph, or shockwave
  *   - Full telemetry dashboard (coordinates, velocity, angle, bounces, direct hits, FPS) and event history log
  */
 
@@ -390,7 +390,7 @@ function applyPreset(presetKey) {
 }
 
 // =========================================================
-// Physics & Motion Mechanics (Part 1)
+// Physics & Motion Mechanics
 // =========================================================
 
 /**
@@ -603,7 +603,7 @@ function respawnBall() {
 }
 
 // =========================================================
-// Mouse Click Interactivity (Part 2)
+// Mouse Click Interactivity
 // =========================================================
 
 /**
@@ -685,7 +685,7 @@ function triggerDirectHit(clickX, clickY) {
 
     switch (clickEffect) {
         case 'explode':
-            // The Professor's Favorite Effect: Exploding Ball!
+            // Particle Explosion Effect
             triggerExplosionEffect();
             break;
 
@@ -710,7 +710,7 @@ function triggerDirectHit(clickX, clickY) {
 }
 
 /**
- * Professor's Favorite Effect: Detonates object into 50 colorful particles
+ * Detonates object into 50 colorful particles
  */
 function triggerExplosionEffect() {
     ball.isAlive = false;

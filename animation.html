@@ -105,7 +105,7 @@
 
                     <!-- Movement & Bounded Arena Column -->
                     <div class="form-group anim-control-panel">
-                        <h4>Movement &amp; Bounded Arena (Part 1)</h4>
+                        <h4>Movement &amp; Bounded Arena</h4>
 
                         <div class="anim-param-row">
                             <div class="slider-header">
@@ -152,11 +152,11 @@
 
                     <!-- Mouse Click & Engine Column -->
                     <div class="form-group anim-control-panel">
-                        <h4>Mouse Click &amp; Engine (Part 2)</h4>
+                        <h4>Mouse Click &amp; Engine</h4>
 
                         <label for="click-effect">Click Response Effect:</label>
                         <select id="click-effect" name="click-effect">
-                            <option value="explode" selected>Particle Explosion &amp; Respawn (Professor's Favorite!)</option>
+                            <option value="explode" selected>Particle Explosion &amp; Respawn</option>
                             <option value="color-deflect">Change Color &amp; Deflect Direction (Speed Boost)</option>
                             <option value="morph">Morph Object Appearance (Cycle Shapes/Images)</option>
                             <option value="repel">Shockwave Repel (Kick Away from Click)</option>
@@ -165,10 +165,10 @@
 
                         <label for="anim-engine" style="margin-top: 12px;">Animation Loop Method:</label>
                         <select id="anim-engine" name="anim-engine">
-                            <option value="timer" selected>Timer-Based (setInterval - Lecture Recommended)</option>
+                            <option value="timer" selected>Timer-Based (setInterval)</option>
                             <option value="raf">requestAnimationFrame (Browser VSync Loop)</option>
                         </select>
-                        <small class="field-help">Recommended timer-based animation vs browser rAF.</small>
+                        <small class="field-help">Timer-based animation vs browser rAF.</small>
 
                         <div class="anim-param-row" id="timer-speed-wrapper">
                             <div class="slider-header">
@@ -180,7 +180,7 @@
 
                         <label class="checkbox-label" style="margin-top: 14px;">
                             <input type="checkbox" id="toggle-sound">
-                            <strong>Synthesized Audio Chimes</strong> (Office-friendly Web Audio pop/ping, no screaming!)
+                            <strong>Synthesized Audio Chimes</strong> (Web Audio pop/ping sound effects)
                         </label>
                     </div>
                 </div>
@@ -265,9 +265,9 @@
             </div>
         </section>
 
-        <!-- Educational & Technical Implementation Notes -->
+        <!-- Technical & Motion Analysis Section -->
         <section class="spiro-intro" style="margin-top: 35px;">
-            <h3>Educational Implementation &amp; Assignment Analysis</h3>
+            <h3>Technical Implementation &amp; Motion Analysis</h3>
             <div class="cards-instructions-box">
                 <ol>
                     <li>
@@ -283,10 +283,10 @@
                         Upon contact, <code>dx = -dx</code> or <code>dy = -dy</code> reverses the respective velocity vector, producing an elastic bounce.
                     </li>
                     <li>
-                        <strong>Timer-Based Animation vs. requestAnimationFrame:</strong> As taught in class lectures and the <a href="https://www.webfx.com/blog/web-design/bouncing-a-ball-around-with-html5-and-javascript/" target="_blank" rel="noopener">Six Revisions bouncing ball guide</a>, <code>setInterval(renderFrame, ms)</code> runs the animation loop at steady fixed time increments. Modern browsers also support <code>window.requestAnimationFrame</code> for monitor-synced refreshes; both methods can be selected and compared above.
+                        <strong>Timer-Based Animation vs. requestAnimationFrame:</strong> The <code>setInterval(renderFrame, ms)</code> function runs the animation loop at steady fixed time increments, referencing the <a href="https://www.webfx.com/blog/web-design/bouncing-a-ball-around-with-html5-and-javascript/" target="_blank" rel="noopener">Six Revisions bouncing ball guide</a>. Modern browsers also support <code>window.requestAnimationFrame</code> for monitor-synced refreshes; both methods can be selected and compared above.
                     </li>
                     <li>
-                        <strong>Euclidean Hit-Testing (Part 2):</strong> When a mouse click occurs, screen coordinates are translated to canvas space using <code>getBoundingClientRect()</code> and normalized for canvas CSS scaling. The Euclidean distance between click coordinates <code>(x_m, y_m)</code> and object center <code>(x, y)</code> is evaluated using <code>Math.hypot(x_m - x, y_m - y)</code>. If this distance is less than or equal to the object's radius, a Direct Hit is registered, triggering the selected visual effect and particle explosion!
+                        <strong>Euclidean Hit-Testing:</strong> When a mouse click occurs, screen coordinates are translated to canvas space using <code>getBoundingClientRect()</code> and normalized for canvas CSS scaling. The Euclidean distance between click coordinates <code>(x_m, y_m)</code> and object center <code>(x, y)</code> is evaluated using <code>Math.hypot(x_m - x, y_m - y)</code>. If this distance is less than or equal to the object's radius, a Direct Hit is registered, triggering the selected visual effect and particle explosion!
                     </li>
                 </ol>
             </div>
