@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assignment 9: HTML5 Canvas Animation and Mouse Click Interactivity for COP4813 by Dakota Freed.">
+    <meta name="author" content="Dakota Freed">
+    <title>Assignment 9: Animation | Dakota Freed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Assignment 9: Canvas Animation &amp; Interactivity</h1>
+        <p>COP4813 Web Systems</p>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="assignments.html">My Assignments</a></li>
+            <li><a href="assignment1.html">Assignment 1</a></li>
+            <li><a href="form.html">Assignment 3 Form</a></li>
+            <li><a href="calculator.html">Assignment 4 Calculator</a></li>
+            <li><a href="spirograph.html">Assignment 5 Canvas</a></li>
+            <li><a href="json.html">Assignment 6 JSON</a></li>
+            <li><a href="cards.html">Assignment 7 Drag &amp; Drop</a></li>
+            <li><a href="animation.html">Assignment 9 Animation</a></li>
+            <li><a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Assignment Overview Section -->
+        <section class="anim-intro">
+            <h2>HTML5 Canvas Object Animation &amp; Mouse Interaction</h2>
+            <p>
+                This project satisfies <strong>Course Outcome 4</strong>: <em>"Use client side scripting languages (DHTML, JavaScript) to add interactivity to web sites."</em>
+                It demonstrates real-time 2D graphics rendering, vector motion physics, boundary collision detection, and user mouse event handling on an HTML5 <code>&lt;canvas&gt;</code> element.
+            </p>
+
+            <div class="equation-box">
+                <code>Position: x(t + &Delta;t) = x(t) + dx &nbsp;|&nbsp; y(t + &Delta;t) = y(t) + dy</code><br>
+                <code>Diagonal Angle: &theta; = atan2(dy, dx) &nbsp;|&nbsp; Equal dx &amp; dy &rArr; 45&deg; Trajectory</code><br>
+                <code>Direct Hit Test: d = &radic;((x_mouse - x_obj)&sup2; + (y_mouse - y_obj)&sup2;) &le; radius</code>
+            </div>
+
+            <div class="cards-instructions-box">
+                <strong>Assignment Requirements Breakdown:</strong>
+                <ul>
+                    <li><strong>Part 1 &ndash; Canvas Object Animation:</strong> The object starts diagonally across the screen (45&deg; when <code>dx == dy</code>), moves across the bounded arena using a timer-based loop (<code>setInterval</code>), and remains bounded by simulating realistic wall bounces, random angle deflections, stopping, or following coordinate paths.</li>
+                    <li><strong>Part 2 &ndash; Mouse Click Interactivity:</strong> When clicked, the object visibly reacts. By default, it detonates into a dazzling particle explosion (the professor's favorite effect!) and respawns. You can also test color shifts, direction changes, object morphing, and shockwaves.</li>
+                    <li><strong>Office-Friendly Audio:</strong> Soft synthesized audio chimes are provided via the Web Audio API with a mute toggle (no screaming ball!).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Presets Section -->
+        <section class="spiro-presets">
+            <h3>Quick Scenario Presets</h3>
+            <p>Select a preset configuration below to quickly test different assignment behaviors:</p>
+            <div class="preset-buttons">
+                <button type="button" class="preset-btn active" data-preset="classic-45">Classic 45&deg; Bouncing Ball</button>
+                <button type="button" class="preset-btn" data-preset="random-bounce">Random Angle Wall Bounce</button>
+                <button type="button" class="preset-btn" data-preset="dakota-hand">Dakota's Waving Hand Avatar</button>
+                <button type="button" class="preset-btn" data-preset="playing-card">Assignment 7 Ace of Spades</button>
+                <button type="button" class="preset-btn" data-preset="neon-star">Neon Star &amp; Motion Trail</button>
+                <button type="button" class="preset-btn" data-preset="equation-path">Mathematical Coordinate Path</button>
+            </div>
+        </section>
+
+        <!-- Controls Section -->
+        <section class="anim-controls-section">
+            <h3>Animation &amp; Physics Controls</h3>
+            <form id="anim-form" onsubmit="return false;">
+                
+                <!-- Primary Action Toolbar -->
+                <div class="button-row" style="margin-bottom: 20px;">
+                    <button type="button" id="btn-toggle-play" class="btn-primary">Pause Animation</button>
+                    <button type="button" id="btn-step" class="btn-secondary">Step 1 Frame</button>
+                    <button type="button" id="btn-reset" class="btn-secondary">Reset Object</button>
+                    <button type="button" id="btn-trigger-effect" class="btn-accent">Trigger Click Reaction Now</button>
+                </div>
+
+                <div class="form-row">
+                    <!-- Object Appearance Column -->
+                    <div class="form-group anim-control-panel">
+                        <h4>Object Appearance</h4>
+                        
+                        <label for="object-type">Object Type:</label>
+                        <select id="object-type" name="object-type">
+                            <option value="ball" selected>3D Shaded Sphere (Drawn on Canvas)</option>
+                            <option value="star">Neon Geometric Star (Drawn on Canvas)</option>
+                            <option value="emoji">Silly Smiley Emoji (Drawn on Canvas)</option>
+                            <option value="hand">Dakota's Waving Hand (Image Object)</option>
+                            <option value="card">Ace of Spades Card (SVG Image Object)</option>
+                        </select>
+                        <small class="field-help">Switch between drawn canvas vector objects and raster/SVG images.</small>
+
+                        <div class="anim-param-row" id="color-param-wrapper">
+                            <label for="object-color">Sphere / Star Color:</label>
+                            <input type="color" id="object-color" name="object-color" value="#ed553b">
+                        </div>
+
+                        <div class="anim-param-row">
+                            <div class="slider-header">
+                                <label for="object-size">Object Radius / Size:</label>
+                                <span class="slider-val" id="val-size">24 px</span>
+                            </div>
+                            <input type="range" id="object-size" name="object-size" min="14" max="46" value="24" step="1">
+                        </div>
+
+                        <label class="checkbox-label" style="margin-top: 10px;">
+                            <input type="checkbox" id="toggle-trail">
+                            <strong>Enable Motion Trail</strong> (fading trajectory ghosting)
+                        </label>
+                    </div>
+
+                    <!-- Movement & Bounded Arena Column -->
+                    <div class="form-group anim-control-panel">
+                        <h4>Movement &amp; Bounded Arena (Part 1)</h4>
+
+                        <div class="anim-param-row">
+                            <div class="slider-header">
+                                <label for="anim-speed">Movement Speed:</label>
+                                <span class="slider-val" id="val-speed">5 px / tick</span>
+                            </div>
+                            <input type="range" id="anim-speed" name="anim-speed" min="1" max="14" value="5" step="1">
+                            <small class="field-help">Determines step displacement per animation tick.</small>
+                        </div>
+
+                        <label for="launch-angle">Initial Launch Angle:</label>
+                        <select id="launch-angle" name="launch-angle">
+                            <option value="45" selected>45&deg; Diagonal (Equal &Delta;x and &Delta;y)</option>
+                            <option value="30">30&deg; Shallow Diagonal</option>
+                            <option value="60">60&deg; Steep Diagonal</option>
+                            <option value="135">135&deg; Diagonal (Opposite Direction)</option>
+                            <option value="random">Random Diagonal Angle</option>
+                            <option value="custom">Custom Angle (Use Slider Below)</option>
+                        </select>
+
+                        <div class="anim-param-row" id="custom-angle-wrapper" style="display: none;">
+                            <div class="slider-header">
+                                <label for="custom-angle">Custom Angle:</label>
+                                <span class="slider-val" id="val-angle">45&deg;</span>
+                            </div>
+                            <input type="range" id="custom-angle" name="custom-angle" min="0" max="360" value="45" step="1">
+                        </div>
+
+                        <label for="bounce-mode" style="margin-top: 12px;">Wall Boundary Behavior:</label>
+                        <select id="bounce-mode" name="bounce-mode">
+                            <option value="reflect" selected>Simulate Bounce (Elastic Vector Reflection)</option>
+                            <option value="random">Send Off in Random Angle (Trigonometric Deflection)</option>
+                            <option value="stop">Stop at Bounded Wall (Halts on Collision)</option>
+                            <option value="path">Follow Calculated Coordinate Path (Lissajous Curve)</option>
+                        </select>
+                        <small class="field-help">Governs behavior when reaching boundary edges.</small>
+
+                        <label for="boundary-inset" style="margin-top: 12px;">Bounded Area Type:</label>
+                        <select id="boundary-inset" name="boundary-inset">
+                            <option value="full" selected>Full Canvas Area (700 &times; 460 px)</option>
+                            <option value="inner">Inner Demarcated Box (Inset Rectangle)</option>
+                        </select>
+                    </div>
+
+                    <!-- Mouse Click & Engine Column -->
+                    <div class="form-group anim-control-panel">
+                        <h4>Mouse Click &amp; Engine (Part 2)</h4>
+
+                        <label for="click-effect">Click Response Effect:</label>
+                        <select id="click-effect" name="click-effect">
+                            <option value="explode" selected>Particle Explosion &amp; Respawn (Professor's Favorite!)</option>
+                            <option value="color-deflect">Change Color &amp; Deflect Direction (Speed Boost)</option>
+                            <option value="morph">Morph Object Appearance (Cycle Shapes/Images)</option>
+                            <option value="repel">Shockwave Repel (Kick Away from Click)</option>
+                        </select>
+                        <small class="field-help">What occurs when the user clicks the moving object.</small>
+
+                        <label for="anim-engine" style="margin-top: 12px;">Animation Loop Method:</label>
+                        <select id="anim-engine" name="anim-engine">
+                            <option value="timer" selected>Timer-Based (setInterval - Lecture Recommended)</option>
+                            <option value="raf">requestAnimationFrame (Browser VSync Loop)</option>
+                        </select>
+                        <small class="field-help">Recommended timer-based animation vs browser rAF.</small>
+
+                        <div class="anim-param-row" id="timer-speed-wrapper">
+                            <div class="slider-header">
+                                <label for="timer-interval">Timer Interval (&Delta;t):</label>
+                                <span class="slider-val" id="val-timer">16 ms (~62 FPS)</span>
+                            </div>
+                            <input type="range" id="timer-interval" name="timer-interval" min="8" max="45" value="16" step="1">
+                        </div>
+
+                        <label class="checkbox-label" style="margin-top: 14px;">
+                            <input type="checkbox" id="toggle-sound">
+                            <strong>Synthesized Audio Chimes</strong> (Office-friendly Web Audio pop/ping, no screaming!)
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Canvas Display Section -->
+        <section class="canvas-section">
+            <div class="canvas-header-bar">
+                <div class="canvas-header-left">
+                    <span id="canvas-status-pill" class="status-pill running">● RUNNING</span>
+                    <span id="canvas-status-text">Object is moving diagonally</span>
+                </div>
+                <div class="canvas-header-right">
+                    <span id="canvas-target-hint">🎯 Target: Click the moving object directly!</span>
+                </div>
+            </div>
+
+            <div class="canvas-container anim-canvas-container">
+                <canvas id="anim-canvas" width="700" height="460" role="img" aria-label="Interactive 2D animation canvas">
+                    Your browser does not support the HTML5 canvas tag. Please update to a modern browser.
+                </canvas>
+                <div class="canvas-tip-footer">
+                    <span>💡 <strong>Interactivity:</strong> Click directly on the moving object to trigger the reaction. Clicking empty canvas space emits an acoustic deflection shockwave!</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Telemetry Dashboard Section -->
+        <section class="telemetry-section">
+            <h3>Real-Time Telemetry &amp; Physics Metrics</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Object Coordinates</div>
+                    <div class="metric-value" id="metric-coords">X: 60 | Y: 60</div>
+                    <div class="metric-sub" id="metric-coords-sub">Canvas Top-Left Origin</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Velocity Vector</div>
+                    <div class="metric-value" id="metric-velocity">dx: +3.54 | dy: +3.54</div>
+                    <div class="metric-sub" id="metric-speed">Speed: 5.0 px/tick</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Trajectory Angle</div>
+                    <div class="metric-value" id="metric-angle">45.0&deg;</div>
+                    <div class="metric-sub" id="metric-quadrant">Diagonal (&Delta;x = &Delta;y)</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Wall Bounces</div>
+                    <div class="metric-value" id="metric-bounces">0</div>
+                    <div class="metric-sub">Arena boundary collisions</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Direct Mouse Hits</div>
+                    <div class="metric-value" id="metric-hits">0</div>
+                    <div class="metric-sub" id="metric-accuracy">Accuracy: 0%</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Engine Frequency</div>
+                    <div class="metric-value" id="metric-fps">60 FPS</div>
+                    <div class="metric-sub" id="metric-engine-sub">setInterval (16ms)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Captured Event History Log Section -->
+        <section class="event-log-section">
+            <div class="event-log-header">
+                <h3>Captured Animation &amp; Click Event History</h3>
+                <button type="button" id="btn-clear-log" class="button-link-inline">Clear Log</button>
+            </div>
+            <p class="field-help">Live chronological log of physics collisions, angle changes, and mouse click responses:</p>
+            <div id="event-log-container" class="event-log-container">
+                <ul id="event-log-list" class="event-log-list">
+                    <li class="log-item initial-log">Ready. Animation initialized with diagonal 45&deg; trajectory. Click the moving object on canvas to trigger reactions.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Educational & Technical Implementation Notes -->
+        <section class="spiro-intro" style="margin-top: 35px;">
+            <h3>Educational Implementation &amp; Assignment Analysis</h3>
+            <div class="cards-instructions-box">
+                <ol>
+                    <li>
+                        <strong>Canvas Coordinate System:</strong> The HTML5 Canvas coordinate origin <code>(0, 0)</code> is located at the top-left corner. The X-axis extends positively to the right, and the Y-axis extends positively downward.
+                    </li>
+                    <li>
+                        <strong>Diagonal Trajectory Math:</strong> When the horizontal velocity component <code>dx</code> and vertical velocity component <code>dy</code> are equal (e.g., <code>dx = 3.54</code> and <code>dy = 3.54</code>), the object travels along a 45-degree angle diagonal path:
+                        <code>&theta; = atan2(dy, dx) = atan2(3.54, 3.54) = 45.0&deg;</code>.
+                    </li>
+                    <li>
+                        <strong>Boundary Clamping &amp; Bouncing:</strong> To prevent the object from penetrating or escaping the bounded rectangle, the object's radius is accounted for:
+                        <code>leftBound = 0 + radius</code>, <code>rightBound = width - radius</code>, <code>topBound = 0 + radius</code>, <code>bottomBound = height - radius</code>.
+                        Upon contact, <code>dx = -dx</code> or <code>dy = -dy</code> reverses the respective velocity vector, producing an elastic bounce.
+                    </li>
+                    <li>
+                        <strong>Timer-Based Animation vs. requestAnimationFrame:</strong> As taught in class lectures and the <a href="https://www.webfx.com/blog/web-design/bouncing-a-ball-around-with-html5-and-javascript/" target="_blank" rel="noopener">Six Revisions bouncing ball guide</a>, <code>setInterval(renderFrame, ms)</code> runs the animation loop at steady fixed time increments. Modern browsers also support <code>window.requestAnimationFrame</code> for monitor-synced refreshes; both methods can be selected and compared above.
+                    </li>
+                    <li>
+                        <strong>Euclidean Hit-Testing (Part 2):</strong> When a mouse click occurs, screen coordinates are translated to canvas space using <code>getBoundingClientRect()</code> and normalized for canvas CSS scaling. The Euclidean distance between click coordinates <code>(x_m, y_m)</code> and object center <code>(x, y)</code> is evaluated using <code>Math.hypot(x_m - x, y_m - y)</code>. If this distance is less than or equal to the object's radius, a Direct Hit is registered, triggering the selected visual effect and particle explosion!
+                    </li>
+                </ol>
+            </div>
+            <p><a href="assignments.html">&larr; Return to My Assignments</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Dakota Freed for COP4813 Web Systems</p>
+    </footer>
+
+    <script src="animation.js"></script>
+</body>
+</html>
