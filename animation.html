@@ -34,24 +34,11 @@
         <!-- Assignment Overview Section -->
         <section class="anim-intro">
             <h2>HTML5 Canvas Object Animation &amp; Mouse Interaction</h2>
-            <p>
-                This project satisfies <strong>Course Outcome 4</strong>: <em>"Use client side scripting languages (DHTML, JavaScript) to add interactivity to web sites."</em>
-                It demonstrates real-time 2D graphics rendering, vector motion physics, boundary collision detection, and user mouse event handling on an HTML5 <code>&lt;canvas&gt;</code> element.
-            </p>
 
             <div class="equation-box">
                 <code>Position: x(t + &Delta;t) = x(t) + dx &nbsp;|&nbsp; y(t + &Delta;t) = y(t) + dy</code><br>
                 <code>Diagonal Angle: &theta; = atan2(dy, dx) &nbsp;|&nbsp; Equal dx &amp; dy &rArr; 45&deg; Trajectory</code><br>
                 <code>Direct Hit Test: d = &radic;((x_mouse - x_obj)&sup2; + (y_mouse - y_obj)&sup2;) &le; radius</code>
-            </div>
-
-            <div class="cards-instructions-box">
-                <strong>Assignment Requirements Breakdown:</strong>
-                <ul>
-                    <li><strong>Part 1 &ndash; Canvas Object Animation:</strong> The object starts diagonally across the screen (45&deg; when <code>dx == dy</code>), moves across the bounded arena using a timer-based loop (<code>setInterval</code>), and remains bounded by simulating realistic wall bounces, random angle deflections, stopping, or following coordinate paths.</li>
-                    <li><strong>Part 2 &ndash; Mouse Click Interactivity:</strong> When clicked, the object visibly reacts. By default, it detonates into a dazzling particle explosion (the professor's favorite effect!) and respawns. You can also test color shifts, direction changes, object morphing, and shockwaves.</li>
-                    <li><strong>Office-Friendly Audio:</strong> Soft synthesized audio chimes are provided via the Web Audio API with a mute toggle (no screaming ball!).</li>
-                </ul>
             </div>
         </section>
 
